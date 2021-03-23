@@ -9,15 +9,15 @@
 <script>
 	export default {
 		name: "TabBarItem",
-    props: {
-			link: {
-				type: String,
-        required: true
+    props:{
+		  path: {
+		    type: String,
+        default: ""
       }
     },
     computed: {
 			isActive() {
-				return this.$route.path.indexOf(this.link) !== -1
+				return this.$route.path.indexOf(this.path) !== -1
       },
       activeStyle() {
 				return this.isActive ? {'color': 'red'} : {}
@@ -25,7 +25,7 @@
     },
     methods: {
 			itemClick() {
-				this.$router.replace(this.link)
+				this.$router.replace(this.path)
       }
     }
 	}
