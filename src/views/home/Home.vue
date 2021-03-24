@@ -6,7 +6,17 @@
     <home-swiper :banner="banner"></home-swiper>
     <recommend-view :recommends="recommends" />
     <feature-view/>
+    <tab-control class="tab-control" :titles="['流行','新款','精选']"></tab-control>
     <ul>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
       <li>1</li>
       <li>1</li>
       <li>1</li>
@@ -20,12 +30,14 @@
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
 import HomeSwiper from "./childComp/HomeSwiper";
 import RecommendView from "./childComp/RecommendView";
 import FeatureView from "./childComp/FeatureView";
 
-import { getHomeMultidata } from "network/home";
+import NavBar from "components/common/navbar/NavBar";
+import TabControl from 'components/content/tabControl/TabControl'
+
+import { getHomeMultidata, getHomeGoods } from "network/home";
 
 export default {
   name: "Home.vue",
@@ -34,11 +46,17 @@ export default {
     HomeSwiper,
     RecommendView,
     FeatureView,
+    TabControl
   },
   data() {
     return {
       banner: [],
       recommends: [],
+      goods: {
+        'pop': { page: 0, list: [] },
+        'news': {page: 0, list: [] },
+        'sell': {page: 0, list: [] },
+      }
     };
   },
   methods: {
@@ -49,9 +67,15 @@ export default {
         console.log(res.data);
       });
     },
+    getHomeGoods(type) {
+      getHomeGoods().then((res) => {
+        console.log(res)
+      })
+    }
   },
   created() {
     this.getHomeMultidata();
+    this.getHomeGoods("pop");
   },
 };
 </script>
@@ -72,5 +96,8 @@ export default {
     z-index: 9;
   }
 
-
+  .tab-control{
+    position: sticky;
+    top: 44px;
+  }
 </style>
