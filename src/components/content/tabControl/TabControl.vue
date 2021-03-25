@@ -16,7 +16,7 @@
       titles: {
         type: Array,
         default(){
-          return ['新款'];
+          return [];
         }
       }
     },
